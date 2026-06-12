@@ -1,0 +1,61 @@
+import java.util.*;
+
+class Process {
+    int pid, arrivalTime, burstTime, priority, startTime, completionTime, turnaroundTime, waitingTime;
+
+    Process(int pid, int arrivalTime, int burstTime, int priority) {
+        this.pid = pid;
+        this.arrivalTime = arrivalTime;
+        this.burstTime = burstTime;
+        this.priority = priority;
+    }
+}
+
+public class PriorityNonPreemptive {
+    public static void priorityNonPreemptiveScheduling(List<Process> processes) {
+        processes.sort(Comparator.comparingInt(p -> p.arrivalTime));
+        int currentTime = 0;
+        int completed = 0;
+        int n = processes.size();
+        List<Process> readyQueue = new ArrayList<>();
+
+        while (completed < n) {
+            for (Process process : processes) {
+                if (process.arrivalTime <= currentTime && !readyQueue.contains(process) && process.completionTime == 0) {
+                    readyQueue.add(process);
+                }
+            }
+
+            if (!readyQueue.isEmpty()) {
+                readyQueue.sort(Comparator.comparingInt(p -> p.priority));
+                Process currentProcess = readyQueue.remove(0);
+                currentProcess.startTime = currentTime;
+                currentProcess.completionTime = currentProcess.startTime + currentProcess.burstTime;
+                currentProcess.turnaroundTime = currentProcess.completionTime - currentProcess.arrivalTime;
+                currentProcess.waitingTime = currentProcess.turnaroundTime - currentProcess.burstTime;
+                currentTime = currentProcess.completionTime;
+                completed++;
+            } else {
+                currentTime++;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        List<Process> processList = Arrays.asList(
+                new Process(1, 0, 4, 2),
+                new Process(2, 1, 3, 1),
+                new Process(3, 2, 1, 4),
+                new Process(4, 3, 2, 3)
+        );
+
+        priorityNonPreemptiveScheduling(processList);
+
+        System.out.println("PID\tArrival\tBurst\tPriority\tStart\tCompletion\tTurnaround\tWaiting");
+        for (Process process : processList) {
+            System.out.printf("%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\n",
+                    process.pid, process.arrivalTime, process.burstTime, process.priority, process.startTime,
+                    process.completionTime, process.turnaroundTime, process.waitingTime);
+        }
+    }
+}

@@ -1,0 +1,44 @@
+import java.util.*;
+
+class Process {
+    int pid, arrivalTime, burstTime, startTime, completionTime, turnaroundTime, waitingTime;
+
+    Process(int pid, int arrivalTime, int burstTime) {
+        this.pid = pid;
+        this.arrivalTime = arrivalTime;
+        this.burstTime = burstTime;
+    }
+}
+
+public class FCFS {
+    public static void fcfsScheduling(List<Process> processes) {
+        processes.sort(Comparator.comparingInt(p -> p.arrivalTime));
+        int currentTime = 0;
+
+        for (Process process : processes) {
+            process.startTime = Math.max(currentTime, process.arrivalTime);
+            process.completionTime = process.startTime + process.burstTime;
+            process.turnaroundTime = process.completionTime - process.arrivalTime;
+            process.waitingTime = process.turnaroundTime - process.burstTime;
+            currentTime = process.completionTime;
+        }
+    }
+
+    public static void main(String[] args) {
+        List<Process> processList = Arrays.asList(
+                new Process(1, 0, 4),
+                new Process(2, 1, 3),
+                new Process(3, 2, 1),
+                new Process(4, 3, 2)
+        );
+
+        fcfsScheduling(processList);
+
+        System.out.println("PID\tArrival\tBurst\tStart\tCompletion\tTurnaround\tWaiting");
+        for (Process process : processList) {
+            System.out.printf("%d\t%d\t%d\t%d\t%d\t%d\t%d\n",
+                    process.pid, process.arrivalTime, process.burstTime, process.startTime,
+                    process.completionTime, process.turnaroundTime, process.waitingTime);
+        }
+    }
+}

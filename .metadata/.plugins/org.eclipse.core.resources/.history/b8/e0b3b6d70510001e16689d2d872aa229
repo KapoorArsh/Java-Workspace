@@ -1,0 +1,13 @@
+package oops;
+interface printable{
+	void print();
+}
+public class Interface implements printable{
+	public void print() {
+		System.out.print("Hello");
+	}
+	public static void main(String[]args) {
+		Interface obj = new Interface();
+		obj.print();
+	}
+}

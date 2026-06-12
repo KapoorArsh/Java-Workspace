@@ -1,0 +1,20 @@
+package oops;
+
+abstract class Abstraction {
+	abstract public void add();
+		void add1() {
+		System.out.println("hello");
+	}
+}
+class Hello1 extends Abstraction{
+	void add() {
+		System.out.println("hiiii");
+	}
+}
+class Hello{
+	public static void main(String [] args) {
+		Hello1 h = new Hello1();
+		h.add();
+		h.add1();
+	}
+}

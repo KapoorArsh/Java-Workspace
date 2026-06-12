@@ -1,0 +1,22 @@
+package SWING;
+import javax.swing.*;
+public class Swing1 {
+	Swing1(){
+		JFrame f = new JFrame();
+		JButton b1 = new JButton("Choose");b1.setBounds(100,100,130,40);
+		f.add(b1);
+		JRadioButton j1 = new JRadioButton("Animal");
+		JRadioButton j2 = new JRadioButton("Bird");
+		j1.setBounds(100,200,100,100);
+		j2.setBounds(200,200,100,100);
+		f.add(j1);
+		f.add(j2);
+		JTextArea jt = new JTextArea(100,200);
+		f.setLayout(null);
+		f.setVisible(true);
+		f.setSize(400,400);
+	}
+	public static void main(String[] args) {
+		new Swing1();
+	}
+}

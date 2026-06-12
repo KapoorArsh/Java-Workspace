@@ -1,0 +1,14 @@
+package corejava;
+import java.util.Scanner;
+public class Query {
+	public static void main{
+	Scanner sc = new Scanner(System.in);
+	System.out.println("What is dollar value right now? (API)");
+	int n = sc.nextInt();
+	int b = n-1;
+	System.out.println("What is the value of ammount submitted in dollars?");
+	int a =sc.nextInt();
+	int c = a * b;
+	System.out.println("this is your amount in ruppees: " + c);
+}
+}

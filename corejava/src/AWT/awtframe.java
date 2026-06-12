@@ -1,0 +1,19 @@
+package AWT;
+
+import java.awt.*;
+
+public class awtframe extends Frame {
+	awtframe(){
+		Button b = new Button("Click me!");
+		b.setBounds(30,100,80,30);
+		add(b);
+		setSize(300,300);
+		setTitle("First AWT CODE");
+		setLayout(null);
+		setVisible(true);
+	}
+	public static void main(String[] args) {
+		//creating instance of frame class
+		awtframe f = new awtframe();
+	}
+}

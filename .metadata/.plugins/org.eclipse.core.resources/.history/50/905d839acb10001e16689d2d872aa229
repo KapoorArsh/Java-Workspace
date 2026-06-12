@@ -1,0 +1,15 @@
+package oops;
+
+public class Polymorphism {
+	public void add(int a) {
+		System.out.println(a);
+	}
+	public void add(int a,int b) {
+		System.out.println(a+b);
+	}
+	public static void main(String [] args) {
+		Polymorphism m = new Polymorphism();
+		m.add(9);
+		m.add(7,9);
+}
+}

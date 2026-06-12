@@ -1,0 +1,26 @@
+package oops;
+import java.util.Scanner;
+public class Studentmethodprint {
+	int id;
+	String name;
+	Studentmethodprint(int i,String n){
+		id = i;
+		name = n;
+	}
+	void display() {
+		System.out.println();
+		System.out.println("This is your first student:- ");
+		System.out.println("id: " + id);
+		System.out.println("name: " + name);
+	}
+	public static void main(String []args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("What is your id?");
+		int a = sc.nextInt();
+		System.out.println("What is your name?");
+		String b = sc.next();
+		Studentmethodprint p1 = new Studentmethodprint(a,b);
+		System.out.println(p1.id + " " + p1.name);
+		p1.display();
+	}
+}

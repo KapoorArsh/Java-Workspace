@@ -1,0 +1,12 @@
+package Collection;
+import java.util.Stack;
+public class stack {
+	public static void main(String[] args) {
+		Stack<Integer>s = new Stack<>();
+		s.push(12);
+		s.push(13);
+		s.push(14);
+		s.push(15);
+		System.out.println(s);
+	}
+}

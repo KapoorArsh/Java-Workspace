@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;corejava.CarWash.java&apos; to &apos;Carwash.java&apos;&#x0D;&#x0A;- Original project: &apos;corejava&apos;&#x0D;&#x0A;- Original element: &apos;corejava.CarWash.java&apos;&#x0D;&#x0A;- Renamed element: &apos;corejava.Carwash.java&apos;" description="Rename compilation unit &apos;CarWash.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;corejava{CarWash.java" name="Carwash.java" references="false" stamp="1697867529781" version="1.0"/>
+</session>

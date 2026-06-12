@@ -1,0 +1,77 @@
+import java.util.*;
+
+class Process {
+    int pid, arrivalTime, burstTime, remainingTime, priority, startTime, completionTime, turnaroundTime, waitingTime;
+
+    Process(int pid, int arrivalTime, int burstTime, int priority) {
+        this.pid = pid;
+        this.arrivalTime = arrivalTime;
+        this.burstTime = burstTime;
+        this.remainingTime = burstTime;
+        this.priority = priority;
+        this.startTime = -1;
+    }
+}
+
+public class PriorityPreemptive {
+    public static void priorityPreemptiveScheduling(List<Process> processes) {
+        processes.sort(Comparator.comparingInt(p -> p.arrivalTime));
+        int currentTime = 0;
+        int completed = 0;
+        int n = processes.size();
+        List<Process> readyQueue = new ArrayList<>();
+        Process currentProcess = null;
+
+        while (completed < n) {
+            for (Process process : processes) {
+                if (process.arrivalTime == currentTime) {
+                    readyQueue.add(process);
+                }
+            }
+
+            if (currentProcess != null && currentProcess.remainingTime == 0) {
+                currentProcess.completionTime = currentTime;
+                currentProcess.turnaroundTime = currentProcess.completionTime - currentProcess.arrivalTime;
+                currentProcess.waitingTime = currentProcess.turnaroundTime - currentProcess.burstTime;
+                completed++;
+                currentProcess = null;
+            }
+
+            if (currentProcess == null || (!readyQueue.isEmpty() && readyQueue.stream().min(Comparator.comparingInt(p -> p.priority)).get().priority < currentProcess.priority)) {
+                if (currentProcess != null && currentProcess.remainingTime > 0) {
+                    readyQueue.add(currentProcess);
+                }
+                if (!readyQueue.isEmpty()) {
+                    readyQueue.sort(Comparator.comparingInt(p -> p.priority));
+                    currentProcess = readyQueue.remove(0);
+                    if (currentProcess.startTime == -1) {
+                        currentProcess.startTime = currentTime;
+                    }
+                }
+            }
+
+            if (currentProcess != null) {
+                currentProcess.remainingTime--;
+            }
+            currentTime++;
+        }
+    }
+
+    public static void main(String[] args) {
+        List<Process> processList = Arrays.asList(
+                new Process(1, 0, 4, 2),
+                new Process(2, 1, 3, 1),
+                new Process(3, 2, 1, 4),
+                new Process(4, 3, 2, 3)
+        );
+
+        priorityPreemptiveScheduling(processList);
+
+        System.out.println("PID\tArrival\tBurst\tPriority\tStart\tCompletion\tTurnaround\tWaiting");
+        for (Process process : processList) {
+            System.out.printf("%d\t\t%d\t\t%d\t\t%d\t\t%d\t\t%d\t\t%d\t\t%d\n",
+                    process.pid, process.arrivalTime, process.burstTime, process.priority, process.startTime,
+                    process.completionTime, process.turnaroundTime, process.waitingTime);
+        }
+    }
+}

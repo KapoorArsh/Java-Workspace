@@ -1,0 +1,17 @@
+package oops;
+import java.util.Scanner;
+public class Constructor {
+	Constructor(int id,String name){
+		System.out.println("This is your submitted data:- ");
+		System.out.println("id: " + id);
+		System.out.println("name: " + name);
+	}
+	public static void main(String [] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("What is your id?");
+		int a = sc.nextInt();
+		System.out.println("What is your name?");
+		String b = sc.next();
+		Constructor obj = new Constructor(a, b);
+	}
+}

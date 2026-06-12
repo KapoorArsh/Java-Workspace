@@ -1,0 +1,10 @@
+package oops;
+class student{
+	student(){
+		System.out.println("Constructor called");
+	}
+}
+
+public class Constructor {
+	
+}

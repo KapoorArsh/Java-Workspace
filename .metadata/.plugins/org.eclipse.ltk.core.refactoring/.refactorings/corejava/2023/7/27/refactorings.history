@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;Filehandling.Filecalss&apos; to &apos;Yourdadcreatedit&apos;&#x0D;&#x0A;- Original project: &apos;corejava&apos;&#x0D;&#x0A;- Original element: &apos;Filehandling.Filecalss&apos;&#x0D;&#x0A;- Renamed element: &apos;Filehandling.Yourdadcreatedit&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Filecalss&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;Filehandling{Filecalss.java[Filecalss" matchStrategy="1" name="Yourdadcreatedit" qualified="false" references="true" similarDeclarations="false" stamp="1688629500714" textual="false" version="1.0"/>
+</session>

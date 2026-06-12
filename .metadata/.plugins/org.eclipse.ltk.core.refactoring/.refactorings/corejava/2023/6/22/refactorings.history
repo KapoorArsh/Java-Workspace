@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;corejava.tring&apos; to &apos;string&apos;&#x0D;&#x0A;- Original project: &apos;corejava&apos;&#x0D;&#x0A;- Original element: &apos;corejava.tring&apos;&#x0D;&#x0A;- Renamed element: &apos;corejava.string&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;tring&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;corejava{tring.java[tring" matchStrategy="1" name="string" qualified="false" references="true" similarDeclarations="false" stamp="1685603704263" textual="false" version="1.0"/>
+</session>

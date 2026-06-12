@@ -1,0 +1,16 @@
+package corejava;
+import java.util.Scanner;
+public class Query {
+	public static void main(String [] args){
+	Scanner sc = new Scanner(System.in);
+	System.out.println("What is dollar to ruppee value right now? (API) (user wont be able to see this when api is being used)");
+	int n = sc.nextInt();
+	int b = n-1;
+	System.out.println("What is the value of ammount submitted in dollars?");
+	int a =sc.nextInt();
+	int c = a * b;
+	System.out.println("this is your amount in ruppees: " + c);
+}
+}
+// can a program be continued after its last line without using loop?
+// functions vs methods

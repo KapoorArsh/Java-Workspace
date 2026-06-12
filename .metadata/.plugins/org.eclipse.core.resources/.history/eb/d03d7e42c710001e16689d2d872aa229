@@ -1,0 +1,11 @@
+package oops;
+
+public class Constructor {
+	Constructor(int id,String name){
+		System.out.println("id: " + id);
+		System.out.println("name: " + name);
+	}
+	public static void main(String [] args) {
+		Constructor obj = new Constructor(12,"Arsh");
+	}
+}

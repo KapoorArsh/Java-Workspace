@@ -1,0 +1,28 @@
+package oops;
+
+class Type3 {
+    int add(int a, int b) {
+        System.out.println("Addition: ");
+        return a + b;
+    }
+
+    int multi(int c, int d) {
+        System.out.println("Multiplication: ");
+        return c * d;
+    }
+}
+
+class Noorpal extends Type3 {
+    public static void main(String[] args) {
+        Noorpal n = new Noorpal();
+        System.out.println(n.multi(3, 4));
+    }
+}
+
+class Kartik extends Type3 {
+    public static void main(String[] args) {
+        Kartik k = new Kartik();
+        System.out.println(k.add(2, 3));
+    }
+}
+

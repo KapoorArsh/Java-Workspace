@@ -1,0 +1,14 @@
+package corejava;
+import java.util.Scanner;
+public class string {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter 2 strings: ");
+		String s = sc.next();
+		String s1 = sc.next();
+		System.out.print(s.toUpperCase());
+		System.out.println(" " + s1.toLowerCase());
+		System.out.println(s.length() + " " + s1.indexOf("d"));
+		System.out.println(s.charAt(3));
+	}
+}

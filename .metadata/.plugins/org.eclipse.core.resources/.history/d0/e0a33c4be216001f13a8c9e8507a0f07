@@ -1,0 +1,85 @@
+import java.util.*;
+
+class Process {
+    int pid, arrivalTime, burstTime, remainingTime, startTime, completionTime, turnaroundTime, waitingTime;
+
+    Process(int pid, int arrivalTime, int burstTime) {
+        this.pid = pid;
+        this.arrivalTime = arrivalTime;
+        this.burstTime = burstTime;
+        this.remainingTime = burstTime;
+        this.startTime = -1;
+    }
+}
+
+public class RoundRobin {
+    public static void roundRobinScheduling(List<Process> processes, int timeQuantum) {
+        processes.sort(Comparator.comparingInt(p -> p.arrivalTime));
+        int currentTime = 0;
+        int completed = 0;
+        int n = processes.size();
+        Queue<Process> readyQueue = new LinkedList<>();
+        Process currentProcess = null;
+
+        while (completed < n) {
+            for (Process process : processes) {
+                if (process.arrivalTime <= currentTime && !readyQueue.contains(process) && process.completionTime == 0) {
+                    readyQueue.add(process);
+                }
+            }
+
+            if (currentProcess == null || currentProcess.remainingTime == 0) {
+                if (currentProcess != null && currentProcess.remainingTime == 0) {
+                    currentProcess.completionTime = currentTime;
+                    currentProcess.turnaroundTime = currentProcess.completionTime - currentProcess.arrivalTime;
+                    currentProcess.waitingTime = currentProcess.turnaroundTime - currentProcess.burstTime;
+                    completed++;
+                    currentProcess = null;
+                }
+                if (!readyQueue.isEmpty()) {
+                    currentProcess = readyQueue.poll();
+                    if (currentProcess.startTime == -1) {
+                        currentProcess.startTime = currentTime;
+                    }
+                }
+            }
+
+            if (currentProcess != null) {
+                int executionTime = Math.min(timeQuantum, currentProcess.remainingTime);
+                currentProcess.remainingTime -= executionTime;
+                currentTime += executionTime;
+
+                if (currentProcess.remainingTime > 0) {
+                    readyQueue.add(currentProcess);
+                } else {
+                    currentProcess.completionTime = currentTime;
+                    currentProcess.turnaroundTime = currentProcess.completionTime - currentProcess.arrivalTime;
+                    currentProcess.waitingTime = currentProcess.turnaroundTime - currentProcess.burstTime;
+                    completed++;
+                    currentProcess = null;
+                }
+            } else {
+                currentTime++;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        List<Process> processList = Arrays.asList(
+                new Process(1, 0, 5),
+                new Process(2, 1, 4),
+                new Process(3, 2, 2),
+                new Process(4, 3, 1)
+        );
+
+        int timeQuantum = 2;
+        roundRobinScheduling(processList, timeQuantum);
+
+        System.out.println("PID\tArrival\tBurst\tStart\tCompletion\tTurnaround\tWaiting");
+        for (Process process : processList) {
+            System.out.printf("%d\t%d\t%d\t%d\t%d\t%d\t%d\n",
+                    process.pid, process.arrivalTime, process.burstTime, process.startTime,
+                    process.completionTime, process.turnaroundTime, process.waitingTime);
+        }
+    }
+}

@@ -1,0 +1,100 @@
+package corejava;
+
+import java.util.Scanner;
+
+//Class to represent a proc
+class proc {
+ int pid; // proc ID
+ int arrivalTime; // Arrival time
+ int burstTime; // Burst time
+ int remainingTime; // Remaining burst time
+ int completionTime; // Completion time
+ int turnaroundTime; // Turnaround time
+ int waitingTime; // Waiting time
+
+ // Constructor to initialize proc attributes
+ proc(int pid, int arrivalTime, int burstTime) {
+     this.pid = pid;
+     this.arrivalTime = arrivalTime;
+     this.burstTime = burstTime;
+     this.remainingTime = burstTime; // Initially, remaining time is equal to burst time
+ }
+}
+
+public class SRTF {
+ public static void main(String[] args) {
+     Scanner scanner = new Scanner(System.in);
+
+     // Read the number of proces
+     System.out.print("Enter the number of proces: ");
+     int n = scanner.nextInt();
+
+     proc[] proces = new proc[n];
+     
+     // Read arrival time and burst time for each proc
+     for (int i = 0; i < n; i++) {
+         System.out.print("Enter arrival time and burst time for proc " + (i + 1) + ": ");
+         int arrivalTime = scanner.nextInt();
+         int burstTime = scanner.nextInt();
+         proces[i] = new proc(i + 1, arrivalTime, burstTime);
+     }
+
+     int completed = 0; // Number of proces completed
+     int currentTime = 0; // Current time
+     int totalWaitingTime = 0; // Total waiting time
+     int totalTurnaroundTime = 0; // Total turnaround time
+
+     // Loop until all proces are completed
+     while (completed != n) {
+         int minIndex = -1; // Index of the proc with the shortest remaining time
+         int minRemainingTime = Integer.MAX_VALUE; // Minimum remaining time
+
+         // Find the proc with the minimum remaining time that has arrived
+         for (int i = 0; i < n; i++) {
+             if (proces[i].arrivalTime <= currentTime && proces[i].remainingTime > 0 &&
+                 proces[i].remainingTime < minRemainingTime) {
+                 minRemainingTime = proces[i].remainingTime;
+                 minIndex = i;
+             }
+         }
+
+         // If no proc is found, increment the current time
+         if (minIndex == -1) {
+             currentTime++;
+             continue;
+         }
+
+         // Execute the proc with the minimum remaining time
+         proces[minIndex].remainingTime--;
+         currentTime++;
+
+         // If the proc is completed
+         if (proces[minIndex].remainingTime == 0) {
+             completed++;
+             proces[minIndex].completionTime = currentTime; // Set completion time
+             proces[minIndex].turnaroundTime = proces[minIndex].completionTime - proces[minIndex].arrivalTime; // Calculate turnaround time
+             proces[minIndex].waitingTime = proces[minIndex].turnaroundTime - proces[minIndex].burstTime; // Calculate waiting time
+
+             totalWaitingTime += proces[minIndex].waitingTime; // Add to total waiting time
+             totalTurnaroundTime += proces[minIndex].turnaroundTime; // Add to total turnaround time
+         }
+     }
+
+     // Display the results
+     System.out.println("\nPID\tArrival\tBurst\tCompletion\tTurnaround\tWaiting");
+     for (proc proc : proces) {
+         System.out.println(proc.pid + "\t" + proc.arrivalTime + "\t" + proc.burstTime + "\t" +
+                 proc.completionTime + "\t\t" + proc.turnaroundTime + "\t\t" + proc.waitingTime);
+     }
+
+     // Calculate and display average turnaround time and waiting time
+     double avgTurnaroundTime = (double) totalTurnaroundTime / n;
+     double avgWaitingTime = (double) totalWaitingTime / n;
+
+     System.out.println("\nAverage Turnaround Time: " + avgTurnaroundTime);
+     System.out.println("Average Waiting Time: " + avgWaitingTime);
+
+     scanner.close();
+ }
+}
+
